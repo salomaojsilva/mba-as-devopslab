@@ -1,23 +1,29 @@
-# Linguagem Utilizada para Desenvolver a Aplicação
-language: python
+# Linguagem Utilizada para Desenvolver a Aplicação                                                                                                
+language: python    
 
-# Versão que a aplicação suporta.
-python:
-  - "3.7.11"
+# Versão que a aplicação suporta.                                                                                                                 
+python:     
+  - "3.7.9"     
 
-# Instalação de Módulos que são necessários para a Aplicação.
-install:
+#Build Environments
+os: linux
+dist: xenial
+
+# Instalação de Módulos que são necessários para a Aplicação.                                                                                     
+install:     
   - pip install flask
 
-# Defini o script de Teste que deve rodar toda vez que o código for alterado.
-script:
+
+# Defini o script de Teste que deve rodar toda vez que o código for alterado.                                                                     
+script:     
   - python -m unittest -v test
 
 # Definir o Deploy no Heroku
 deploy:
   provider: heroku
+  strategy: api 
   api_key: $HEROKU_API_KEY
   edge: true 
-  app: devopslab-salomao
-  on:
+  app: devopslab-salomao                                                                                                                      
+  on: 
       branch: main
