@@ -1,1 +1,1 @@
-web: gunicorn app:devopslab-salomao
+web: gunicorn devopslab-salomao:app
