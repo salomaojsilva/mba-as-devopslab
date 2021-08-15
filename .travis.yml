@@ -29,7 +29,7 @@ deploy:
       branch: main
   - provider: gae
     keyfile: ../lab-devops-cloud-322914-6897f2349e8f.json
-    project: lab-devops-cloud-322914
+    project: devopslab-salomao
     on:
       branch: master
 before_install:
