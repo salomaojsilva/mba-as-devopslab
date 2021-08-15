@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def pagina_inicial():
-    return "Laboratório Pipeline DevOps"
+    return "Laboratório Pipeline DevOps - Salomao"
 
 if __name__ == '__main__':
     app.run(debug=True)
