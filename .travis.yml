@@ -28,11 +28,11 @@ deploy:
     on: 
       branch: main
   - provider: gae
-    keyfile: ../lab-devops-cloud-322914-6897f2349e8f.json
+    keyfile: lab-devops-cloud-322914-6897f2349e8f.json
     project: lab-devops-cloud-322914
     on:
       branch: master
 before_install:
-- openssl aes-256-cbc -K $encrypted_26af4bb24f1b_key -iv $encrypted_26af4bb24f1b_iv
-  -in lab-devops-cloud-322914-6897f2349e8f.json.enc -out ../lab-devops-cloud-322914-6897f2349e8f.json
+- openssl aes-256-cbc -K $encrypted_b87d1da1fa6a_key -iv $encrypted_b87d1da1fa6a_iv
+  -in lab-devops-cloud-322914-6897f2349e8f.json.enc -out lab-devops-cloud-322914-6897f2349e8f.json
   -d
