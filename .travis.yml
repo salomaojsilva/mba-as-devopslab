@@ -13,50 +13,26 @@ dist: xenial
 install:     
   - pip install flask
 
+
+# Defini o script de Teste que deve rodar toda vez que o código for alterado.                                                                     
+script:     
+  - python -m unittest -v test
+
+# Definir o Deploy no Heroku
+deploy:
+  - provider: heroku
+    strategy: api 
+    api_key: $HEROKU_API_KEY
+    edge: true 
+    app: devopslab-salomao                                                                                                                      
+    on: 
+      branch: main
+  - provider: gae
+    keyfile: ../devopslab-salomao-bd72a5139035.json
+    project: devopslab-salomao
+    on:
+      branch: main
 before_install:
 - openssl aes-256-cbc -K $encrypted_2dde5485a8f1_key -iv $encrypted_2dde5485a8f1_iv
   -in devopslab-salomao-bd72a5139035.json.enc -out ../devopslab-salomao-bd72a5139035.json
   -d
-
-# Defini o script de Teste que deve rodar toda vez que o código for alterado.                                                                     
-#script:     
-#  - python -m unittest -v test
-jobs:
-  include:
-    - stage: Build
-
-      name: "Testes unitários"
-      # Instalação de Módulos que são necessários para a Aplicação.
-      install:
-        - pip install flask flask-wtf coverage
-      script:  # Defini o script de Teste que deve rodar toda vez que o código for alterado.
-        - coverage run test.py || travis_terminate 1;
-      
-    - stage: STG Deploy
-      script: skip
-      # Definir o Deploy no Heroku
-      deploy:
-        provider: heroku
-        strategy: api 
-        api_key: $HEROKU_API_KEY
-        edge: true 
-        app: devopslab-salomao                                                                                                                      
-        on: 
-          branch: main
-
-    - stage: STG Test
-      script:
-        - curl https://devopslab-salomao.herokuapp.com/ | grep Salomao || travis_terminate 1;
-      
-    - stage: PROD Deploy
-      script: skip
-      # Definir o Deploy no Google Cloud
-      deploy:
-        provider: gae
-        keyfile: ../devopslab-salomao-bd72a5139035.json
-        project: devopslab-salomao
-        on:
-          branch: main
-    - stage: PROD TEST
-      script:
-        - curl https://devopslab-salomao.uc.r.appspot.com/ | grep Salomao || travis_terminate 1;
